@@ -1,6 +1,22 @@
+mod guessing_game;
+
 fn main() {
     println!("Welcome to Sol-calculus world!");
 
+    // Ask the user if they want to play a game
+    println!("Do you want to play a game? (yes or no)");
+
+    let mut choice = String::new();
+    if let Err(_) = std::io::stdin().read_line(&mut choice) {
+        println!("Failed to read input. Continuing with the rest of the program.");
+    } else {
+        let choice = choice.trim().to_lowercase();
+        if choice == "yes" {
+            guessing_game::guessing_game(); // Call the guessing_game function
+        }
+    }
+
+    // Continue with the rest of the program
     struct Citizen {
         name: String,
         age: u8,
@@ -47,8 +63,7 @@ fn main() {
         }
     }
 
-
-    //atm scenario
+    // ATM scenario
     let atm_balance = match get_input("Enter the simulated ATM balance: ") {
         Ok(value) => value as u64,
         Err(err) => {
@@ -66,7 +81,7 @@ fn main() {
                 return;
             }
         };
-       
+
         if withdrawal_amount > atm_balance {
             println!("ATM does not have sufficient funds.");
         } else if withdrawal_amount as i64 > president.account_balance {
@@ -79,7 +94,6 @@ fn main() {
         println!("Insufficient funds in your account.");
     }
 
-
     // Check if the citizen is an employee
     if president.is_employee {
         println!("{} is an employee.", president.name);
@@ -88,14 +102,12 @@ fn main() {
         println!("{} is not an employee.", president.name);
     }
 
-
     // Check if the citizen owns property
     if president.owns_property {
         println!("{} owns property: {}", president.name, president.which_property);
     } else {
         println!("{} does not own any property.", president.name);
     }
-
 
     // Check if the citizen owns a business
     if president.owns_business {
@@ -105,8 +117,8 @@ fn main() {
         let mut stock = match get_input("Enter the stock amount: ") {
             Ok(value) => value as i64,
             Err(err) => {
-            println!("Error: {}", err);
-            return;
+                println!("Error: {}", err);
+                return;
             }
         };
 
@@ -114,35 +126,35 @@ fn main() {
 
         while stock > 10 || stock < 0 {
             if stock > 10 {
-            println!("Stock is too much, please enter a valid amount less than or equal to 10: ");
+                println!("Stock is too much, please enter a valid amount less than or equal to 10: ");
             } else if stock < 0 {
-            println!("Stock cannot be negative, please enter a valid amount: ");
+                println!("Stock cannot be negative, please enter a valid amount: ");
             }
 
             println!("----------------------------------------");
 
             stock = match get_input("Enter stock amount: ") {
-            Ok(value) => value as i64,
-            Err(err) => {
-                println!("Error: {}", err);
-                return;
-            }
+                Ok(value) => value as i64,
+                Err(err) => {
+                    println!("Error: {}", err);
+                    return;
+                }
             };
         }
 
         println!("Stock is valid, proceed with business process.");
         println!("----------------------------------------");
         println!("Business Process is .....");
-        for _ in 0..200_000_000 {};
+        for _ in 0..200_000_000 {}
 
         while stock > 0 {
             stock -= 1;
             println!("Processing stock {} for business: {}", stock, president.business_name);
-            for _ in 0..200_000_000 {} 
+            for _ in 0..200_000_000 {}
             println!("----------------------------------------");
             for _ in 0..100_000_000 {}
         }
-        
+
         println!("All stock processed successfully.");
         println!("----------------------------------------");
 
@@ -150,9 +162,7 @@ fn main() {
         println!("{} does not own any business.", president.name);
     }
 
-
     // Display the citizen's information
     println!("Citizen Information:");
     println!("President Name: {}", president.name);
-
 }
